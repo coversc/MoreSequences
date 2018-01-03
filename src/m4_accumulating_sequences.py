@@ -22,7 +22,7 @@ def main():
     #   They launch annoying rg.RoseWindows on each run that you don't want
     #   until you get to TO DO 9 and 10.
     # ------------------------------------------------------------------
-    run_test_draw_shapes()
+    #run_test_draw_shapes()
     # run_test_rectangles_from_circles()
 
 
@@ -76,7 +76,7 @@ def make_simple_list(m, n):
     """
 
     sequence = []
-    for k in range (n-m+2):
+    for k in range (n-m+1):
         sequence = sequence + [m + k]
     return sequence
 
@@ -202,9 +202,9 @@ def make_less_simple_string(m, n):
     """
 
     sequence = ''
-    for k in range(n-1):
+    for k in range(n-m):
         sequence = sequence + str(m+k) + '-'
-    sequence = sequence + str(n)
+    #sequence = sequence + str(m+k)
 
     return(sequence)
 
@@ -292,8 +292,11 @@ def draw_shapes(shapes, window):
       :type window:  rg.RoseWindow
     """
 
-    for k in range (shapes):
+    #shapes.
 
+    for k in range (shapes):
+        circle.attach_to(window)
+        rectangle.attach_to(window)
 
     window.render(0.3)
 
