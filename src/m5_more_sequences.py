@@ -315,7 +315,7 @@ def contains_an_a(s):
 
 
 # array [k] --> element at index in array
-    
+
     for k in range (len(s)):
         if s[k] == 'a':
             return True
