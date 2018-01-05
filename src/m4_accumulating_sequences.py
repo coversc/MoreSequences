@@ -23,7 +23,7 @@ def main():
     #   until you get to TO DO 9 and 10.
     # ------------------------------------------------------------------
     #run_test_draw_shapes()
-    # run_test_rectangles_from_circles()
+    run_test_rectangles_from_circles()
 
 
 def run_test_make_simple_list():
@@ -165,7 +165,7 @@ def run_test_make_less_simple_string():
 
     # Test 1:
     expected = '5-6-7-8-9-10-11-12-13'
-    actual = make_simple_string(5, 13)
+    actual = make_less_simple_string(5, 13)
     print('Expected:', expected)
     print('Actual:  ', actual)
 
@@ -173,7 +173,7 @@ def run_test_make_less_simple_string():
 
     # Test 2:
     expected = '8-9-10-11-12-13-14-15-16-17-18-19-20'
-    actual = make_simple_string(8, 20)
+    actual = make_less_simple_string(8, 20)
     print('Expected:', expected)
     print('Actual:  ', actual)
 
@@ -204,12 +204,12 @@ def make_less_simple_string(m, n):
     sequence = ''
     for k in range(n-m):
         sequence = sequence + str(m+k) + '-'
-    #sequence = sequence + str(m+k)
+    sequence = sequence + str(n)
 
     return(sequence)
 
     # ------------------------------------------------------------------
-    # TODO: 7. Implement and test this function.
+    # DONE: 7. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -----------------------------------------------------------------
 
@@ -292,17 +292,14 @@ def draw_shapes(shapes, window):
       :type window:  rg.RoseWindow
     """
 
-    #shapes.
-
-    for k in range (shapes):
-        circle.attach_to(window)
-        rectangle.attach_to(window)
-
-    window.render(0.3)
+    for k in range (len(shapes)):
+        shapes[k].attach_to(window)  #shapes list
+        window.render(0.3)
 
 
     # ------------------------------------------------------------------
-    # TODO: 9. Implement and test this function. Make sure you do TO DO 8 in main first!
+    # DONE: 9. Implement and test this function. Make sure you do TO DO 8 in
+        # main first!
     #     The testing code is already written for you (that you just enabled in TO DO 8).
     #
     ####################################################################
@@ -412,8 +409,23 @@ def rectangles_from_circles(circles):
       :type circles:  list | tuple of rg.Circle
       :rtype: list of rg.Rectangles
     """
+
+    rectangles = []
+    for k in range (len(circles)):
+        center_x = circles[k].center.x
+        center_y = circles[k].center.y
+        radius = circles[k].radius
+        rectangle = rg.Rectangle(rg.Point(center_x + radius, center_y +
+                                          radius),
+                                 rg.Point(center_x - radius, center_y -
+                                          radius))
+        rectangles.append(rectangle)
+
+    return(rectangles)
+
+
     # ------------------------------------------------------------------
-    # TODO: 10. Implement and test this function.
+    # DONE: 10. Implement and test this function.
     #     The testing code is already written for you (above).
     #
     ####################################################################
