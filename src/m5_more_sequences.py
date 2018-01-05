@@ -15,8 +15,8 @@ import rosegraphics as rg
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    #run_test_sum_radii()
-    #run_test_count_last_n_odds()
+    run_test_sum_radii()
+    run_test_count_last_n_odds()
     run_test_index_of_first_negative()
     run_test_contains_an_a()
 
@@ -77,15 +77,15 @@ def sum_radii(circles):
     """
 
     sum = 0
-    radius = circles.radius()
-    for k in range (circles):
+    for k in range (len(circles)):
+        radius = circles[k].radius
         sum = sum + radius
 
     return(sum)
 
 
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     #
     # Note: No fair using "slices" on ANY of these problems,
@@ -161,14 +161,19 @@ def count_last_n_odds(integers, n):
     """
 
     count = 0
-    #get values of integers and set to variable
-    if n % 2 != 0:
-        count = count + 1
+    for k in range (n):
+        if integers[len(integers) - n + k] % 2 == 1:
+            count = count + 1
+
+    #for k in range(len(integers)):
+        #if k > len(integers) - n:
+            #if integers[k] % 2 == 1:
+                #count = count + 1
 
     return count
 
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
@@ -243,12 +248,14 @@ def index_of_first_negative(numbers):
       :rtype: int
     """
 
-    if k+1 % 2 != 0:
-        return k
+    for k in range (len(numbers)):
+        if numbers[k] < 0:
+            return k
 
+    return(-1)
 
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
@@ -306,15 +313,16 @@ def contains_an_a(s):
       :rtype: bool
     """
 
-    #has in it an a??
 
-    if s
-        return True
-    else:
-        return False
+# array [k] --> element at index in array
+    
+    for k in range (len(s)):
+        if s[k] == 'a':
+            return True
+    return False
 
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #     The testing code is already written for you (above).
     #
     ####################################################################
