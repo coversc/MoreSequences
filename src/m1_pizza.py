@@ -27,11 +27,11 @@ def main():
     #     4. When satisfied with your work, move onto the next test.
     # ------------------------------------------------------------------
 
-    run_test_generate_points_on_circle()
-    run_test_draw_points_on_circle()
-    # run_test_pizza()
-    # run_test_polygon()
-    # run_test_fancy_polygon()
+    #run_test_generate_points_on_circle()
+    #run_test_draw_points_on_circle()
+    #run_test_pizza()
+    #run_test_polygon()
+    run_test_fancy_polygon()
 
 
 def run_test_generate_points_on_circle():
@@ -235,17 +235,17 @@ def draw_points_on_circle(window, circle, number_of_points, color):
     """
 
     circle.attach_to(window)
-    generate_points_on_circle(circle, number_of_points)
+    pointslist = generate_points_on_circle(circle, number_of_points)
 
-    #for k in range (number_of_points):
-        #circle2 = rg.Circle(x, 10)
-        #circle2.attach_to(window)
-
-
+    for points in (pointslist):
+        circle2 = rg.Circle(points, 10)
+        circle2.attach_to(window)
+        circle2.fill_color = color
+        points.attach_to(window)
     window.render()
 
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPLEMENTATION REQUIREMENT:
@@ -307,7 +307,7 @@ def run_test_pizza():
     title = 'PIZZA test 4:  15 slices, thin (thickness=3) black lines.'
     window = rg.RoseWindow(400, 400, title)
     circle = rg.Circle(rg.Point(200, 200), 150)
-    circle.fill_color(yellow)
+    circle.fill_color = 'yellow'
     circle.outline_thickness = 3
     pizza(window, circle, 15, 'black', 3)
     window.close_on_mouse_click()
@@ -344,16 +344,20 @@ def pizza(window, circle, number_of_slices, color, thickness):
     """
 
     circle.attach_to(window)
-    center = circle.center()
-    for k in range (number_of_slices):
-        line = rg.Line(center, )
-        thickness = rg.Line.thickness()
-        color = rg.Line.color()
+    pointslist = generate_points_on_circle(circle, number_of_slices)
+    x = circle.center.x
+    y = circle.center.y
+
+    for points in pointslist:
+        line = rg.Line(rg.Point(x,y), points)
+        line.thickness = thickness
+        line.color = color
+        line.attach_to(window)
 
     window.render()
 
     # ------------------------------------------------------------------
-    # TODO: 6. Implement and test this function.
+    # DONE: 6. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPLEMENTATION REQUIREMENT:
@@ -431,15 +435,22 @@ def polygon(window, circle, number_of_segments, color, thickness):
     """
 
     circle.attach_to(window)
-    for k in range (number_of_segments):
-        polygon = rg.Polygon()
-        color = rg.Polygon.color()
-        thickness = rg.Polygon.outline_thickness()
+    pointslist = generate_points_on_circle(circle, number_of_segments)
+
+    for k in range (len(pointslist)):
+        if k == len(pointslist) - 1:
+            line = rg.Line(pointslist[k], pointslist[0])
+        else:
+            line = rg.Line(pointslist[k], pointslist[k + 1])
+        line.color = color
+        line.thickness = thickness
+        line.attach_to(window)
+
 
     window.render()
 
     # ------------------------------------------------------------------
-    # TODO: 8. Implement and test this function.
+    # DONE: 8. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPLEMENTATION REQUIREMENT:
@@ -556,8 +567,21 @@ def fancy_polygon(window, circle, number_of_lines, hops_to_next_point, color, th
       :type color:           str
       :type thickness:       int
     """
+
+    circle.attach_to(window)
+    pointslist = generate_points_on_circle(circle, number_of_lines)
+
+    for k in range (len(pointslist)):
+        nextk = (k + hops_to_next_point) % number_of_lines
+        line = rg.Line(pointslist [k], pointslist[nextk])
+        line.thickness = thickness
+        line.color = color
+        line.attach_to(window)
+
+    window.render()
+
     # ------------------------------------------------------------------
-    # TODO: 10. Implement and test this function.
+    # DONE: 10. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPLEMENTATION REQUIREMENT:
